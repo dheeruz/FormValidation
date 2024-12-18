@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  client:
+    build: ./client  # Path to React app
+    ports:
+      - "3000:80"    # Maps React app to localhost:3000
+    depends_on:
+      - server       # Ensures server starts before the client
+    restart: always   # Automatically restart if it crashes
+
+  server:
+    build: ./server  # Path to backend
+    ports:
+      - "5000:5000"  # Maps backend to localhost:5000
+    environment:
+      - NODE_ENV=production  # Backend environment variable
+    restart: always  # Ensures backend restarts if it crashes
